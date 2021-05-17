@@ -6,8 +6,7 @@ import pandas
 # レビューデータのデータフレームの作成
 def create_review_data_frame(reviews):
     # レビューテーブルのカラム
-    COLUMNS = ['reviewId','productId', 'name', 'gender', 'ageRange', 'shoeSize', 'heightRange', 'weightRange', 'purchasedSize', 'fit', 'comment' ]
-    
+    COLUMNS = ['reviewId','productId', 'name', 'gender', 'ageRange', 'shoeSize', 'heightRange', 'weightRange', 'purchasedSize', 'rate', 'fit', 'comment' ]   
     return pandas.DataFrame(reviews, columns=COLUMNS);
 
 HEADERS = {"content-type": "application/json"}
@@ -43,4 +42,4 @@ review = review.get_review_data(products)
 review_data_frame = create_review_data_frame(review)
 
 #　CSVファイルの作成
-review_data_frame.to_csv('uniqlo_review.csv', encoding='utf_8_sig');
+review_data_frame.to_csv('review_data.csv', encoding='utf_8_sig');
