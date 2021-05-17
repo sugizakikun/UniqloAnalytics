@@ -1,0 +1,26 @@
+#　半袖シャツ　サンプルデータ
+products_info = [
+                     {'product_name': 'クルーネックT（半袖）', 'product_id': 'E425663-000', 'rating_score': 4.37, 'rating_count': 274}, 
+                     {'product_name': 'クルーネックT（半袖）', 'product_id': 'E424873-000', 'rating_score': 4.54, 'rating_count': 3560}, 
+                     {'product_name': 'スーピマコットンクルーネックT（半袖）', 'product_id': 'E437831-000', 'rating_score': 3.64, 'rating_count': 131},
+                     {'product_name': 'エアリズムコットンオーバークルーネックT（半袖）', 'product_id': 'E433635-000', 'rating_score': 4.44, 'rating_count': 491},
+                     {'product_name': 'スムースコットンフレンチスリーブT（半袖）', 'product_id': 'E436550-000', 'rating_score': 4.41, 'rating_count': 429},
+                     {'product_name': 'スムースコットンラウンドヘムロングT（半袖）', 'product_id': 'E436154-000', 'rating_score': 4.3, 'rating_count': 223},
+                     {'product_name': 'スーピマコットンクルーネックＴ（半袖）', 'product_id': 'E433577-000', 'rating_score': 3.91, 'rating_count': 22},
+                     {'product_name': 'エアリズムシームレスＶネックロングＴ（半袖）', 'product_id': 'E433731-000', 'rating_score': 4.55, 'rating_count': 197}, 
+                     {'product_name': 'エアリズムシームレスVネックロングT（半袖）', 'product_id': 'E422809-000', 'rating_score': 4.35, 'rating_count': 1241}, 
+                     {'product_name': 'クレープジャージーフレンチスリーブTシャツ（半袖）セットアップ可能', 'product_id': 'E433710-000', 'rating_score': 4.33, 'rating_count': 261},
+                     {'product_name': 'あつまれ どうぶつの森 チュニック（半袖）', 'product_id': 'E441642-000', 'rating_score': 4.6, 'rating_count': 10},
+                     {'product_name': 'あつまれ どうぶつの森 チュニック（半袖）', 'product_id': 'E441641-000', 'rating_score': 4.7, 'rating_count': 10}, 
+                     {'product_name': 'コットンリブクルーネッククロップドT（半袖）', 'product_id': 'E440749-000', 'rating_score': 4.42, 'rating_count': 33}, 
+                     {'product_name': 'シアークルーネックＴ（半袖）', 'product_id': 'E440051-000', 'rating_score': 4.48, 'rating_count': 25}, 
+                     {'product_name': 'ドレープクルーネックT（半袖）', 'product_id': 'E437618-000', 'rating_score': 4.55, 'rating_count': 103},
+                     {'product_name': 'フューチュラ ドライEXプリントクルーネックTシャツ（半袖）', 'product_id': 'E434214-000', 'rating_score': 4.71, 'rating_count': 7},
+                     {'product_name': 'ドライEXクロップドT（コットンライク・半袖）', 'product_id': 'E433960-000', 'rating_score': 4.48, 'rating_count': 27}, 
+                     {'product_name': 'ドライEXクルーネックT（半袖）', 'product_id': 'E433733-000', 'rating_score': 4.45, 'rating_count': 51}, 
+                     {'product_name': 'エアリズムAラインポロシャツ（半袖）', 'product_id': 'E438482-000', 'rating_score': 0, 'rating_count': 0},
+                     {'product_name': 'エアリズムボートネックTシャツ（5分袖）', 'product_id': 'E437986-000', 'rating_score': 0, 'rating_count': 0},
+                     {'product_name': 'スムースコットンフレンチスリーブT（半袖）', 'product_id': 'E436550-000', 'rating_score': 4.41, 'rating_count': 429}, 
+                     {'product_name': 'エアリズムシームレスVネックロングT（半袖）', 'product_id': 'E431533-000', 'rating_score': 4.08, 'rating_count': 186}, 
+                     {'product_name': 'エアリズムシームレスVネックロングT（半袖）', 'product_id': 'E422809-000', 'rating_score': 4.35, 'rating_count': 1241}        
+                ];
