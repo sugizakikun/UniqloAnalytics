@@ -16,6 +16,7 @@ def extract_analysis_data(review):
                 review['heightRange'], 
                 review['weightRange'],
                 review['purchasedSize'],
+                review['rate'],
                 review['fit'],
                 review['comment'],
             ];
@@ -49,6 +50,7 @@ def get_review_data(products):
             
             #APIデータの整形
             review = review + list(map(extract_analysis_data,  review_api));
+            
     
     return review;    
 
