@@ -4,80 +4,23 @@
 """
 
 import pandas
-import urllib.request
-import re
-import MeCab
+import preprocess as p
 from sklearn.feature_extraction.text import TfidfVectorizer
 
-#改行コードを取り除く
-def remove_new_line_character(text):
-    text = text.replace('\n', '');
-    text = text.replace('\r', '');
-    return text;
-
-
-# 形態素解析に関係ない数字を全て⓪に置換する関数
-def replace_number_to_zero(text):
-    changed_text = re.sub(r'[0-9]+', "0", text) #半角
-    changed_text = re.sub(r'[０-９]+', "0", changed_text) #全角
-    return changed_text
-
-
-# ストップワードの定義
-def set_stopwords():
-    slothlib_path = 'http://svn.sourceforge.jp/svnroot/slothlib/CSharp/Version1/SlothLib/NLP/Filter/StopWord/word/Japanese.txt'
-    slothlib_file = urllib.request.urlopen(slothlib_path)
-    slothlib_stopwords = [line.decode("utf-8").strip() for line in slothlib_file]
-    slothlib_stopwords = [ss for ss in slothlib_stopwords if not ss==u'']
-    
-    slothlib_stopwords += ['0', 'センチ', 'キロ', 'cm', 'kg', 'ユニクロ', 'UNIQLO', 'Uniqlo', 'ｃｍ', 'ｋｇ'] 
-    return set(slothlib_stopwords);
-
-
-# リストを文字列に変換する関数
-def join_list_str(list):
-    return ' '.join(list)
-
-
-# ストップワード
-stopwords = set_stopwords();
-
-#内容語（名詞・形容詞・動詞・副詞）のみを抽出
-tagger = MeCab.Tagger()
-
-def extract_content_words(text):
-    content_words = [];
-    node = tagger.parseToNode(text);
-    
-    while node:
-        if( node.feature.split(",")[0] not in ['助詞', '助動詞', '接続詞', '動詞', '補助記号']):
-            if( node.surface not in stopwords ):
-                content_words.append(node.surface)
-        node = node.next;
-    
-    content_words.pop(0);
-
-    return join_list_str(content_words);
-
-
-def split_review_for_gender(review_df, gender):     
-    #　改行コードを取り除く
-    review_df['remove_new_line_character'] = review_df['comment'].map(remove_new_line_character);
-    
-    # 数字を0に置換
-    review_df['comment_number_to_zero'] = review_df['remove_new_line_character'].map(replace_number_to_zero)
-    
-    #　分かち書きしたカラムをdfに追加する  
-    review_df['lsbw'] = review_df['comment_number_to_zero'].map(extract_content_words)
-    
-    return review_df[review_df['gender'] == gender]
-
+# TF-IDF の結果からi 番目のドキュメントの特徴的な上位 n 語を取り出す関数
+# terms = 単語リスト
+# tfidfs = TF-IDF行列
+def extract_feature_words(terms, tfidfs, i, n):
+    tfidf_array = tfidfs[i]
+    top_n_idx = tfidf_array.argsort()[-n:][::-1]
+    words = [terms[idx] for idx in top_n_idx]
+    return words
 
 
 review_df = pandas.read_csv('airism_review.csv', index_col=0);
 
-women_review = split_review_for_gender(review_df, '女性');
-men_review = split_review_for_gender(review_df, '男性');
+women_review = p.split_review_for_gender(review_df, '女性');
+men_review = p.split_review_for_gender(review_df, '男性');
 
 # 女性の口コミテキストの結合
 sum_review_women = ''
@@ -106,8 +49,28 @@ tfidf_matrix = tfidf_vectorizer.fit_transform(merge_df['sum_review'])
 # index 順の単語リスト
 terms = tfidf_vectorizer.get_feature_names()
 
-
 tfidfs = tfidf_matrix.toarray()
 
-# 形状
-print(tfidfs.shape)
+# 新しい列を追加
+merge_df['tfidf'] = ''
+
+# 結果の出力
+for i in range(0, len(merge_df['sum_review'])):
+    print ('------------------------------------------')
+    print (merge_df['score'][i])
+    feature_words = extract_feature_words(terms, tfidfs, i, 150)
+    print ('feature_words:')
+    print(feature_words)
+    merge_df.at[i, 'tfidf'] = feature_words
+
+
+l1 = merge_df.at[0, 'tfidf']
+l2 = merge_df.at[1, 'tfidf']
+
+# 3.5以上にしか存在しない単語
+result = set(l1) - set(l2)
+print(result)
+
+# 3.3以下にしか存在しない単語
+result = set(l2) - set(l1)
+print(result)
