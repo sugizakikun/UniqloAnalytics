@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
-from janome.tokenizer import Tokenizer
 import requests
-import json
 import math
 
 # 分析対象のデータを抽出 & 整形
@@ -49,8 +47,7 @@ def get_review_data(products):
             review_api = data['result']['reviews']
             
             #APIデータの整形
-            review = review + list(map(extract_analysis_data,  review_api));
-            
+            review = review + list(map(extract_analysis_data,  review_api));     
     
     return review;    
 
